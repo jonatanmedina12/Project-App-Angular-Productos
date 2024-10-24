@@ -1,0 +1,199 @@
+.product-management-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.main-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+mat-card-header {
+  background-color: #f0f4f8;
+  padding: 1rem;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+mat-card-subtitle {
+  color: #7f8c8d;
+}
+
+mat-card-content {
+  padding: 1.5rem;
+}
+
+.search-and-add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-field {
+  flex-grow: 1;
+  margin-right: 1rem;
+}
+
+.add-button {
+  flex-shrink: 0;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.product-item mat-card-header {
+  background-color: #ecf0f1;
+  padding: 1rem;
+}
+
+.product-item mat-card-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #34495e;
+}
+
+.product-item mat-card-subtitle {
+  color: #7f8c8d;
+}
+
+.product-item mat-card-content {
+  padding: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #27ae60;
+  margin: 0 0 0.5rem 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+.form-card mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.form-card mat-slide-toggle {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.mat-icon-button {
+  transition: all 0.3s ease;
+}
+
+.mat-icon-button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+
+.ng-enter {
+  animation: fadeIn 0.3s both ease-in;
+}
+
+.ng-leave {
+  animation: fadeOut 0.3s both ease-in;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .search-and-add {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-field {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-card {
+    width: 95%;
+    max-height: 95vh;
+  }
+}

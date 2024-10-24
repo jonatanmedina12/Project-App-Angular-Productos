@@ -1,0 +1,22 @@
+<mat-sidenav-container class="dashboard-container">
+    <!-- Sidebar -->
+    <mat-sidenav #drawer mode="side" [opened]="false" class="sidebar">
+        <app-sidebar-main></app-sidebar-main>
+    </mat-sidenav>
+  
+    <!-- Main content -->
+    <mat-sidenav-content>
+      <!-- Header -->
+      <app-header-main (sidenavToggle)="onToggleSidenav()" class="header" id="header"></app-header-main>
+      <!-- Content area -->
+      <div class="content-area">
+        <router-outlet></router-outlet>
+
+      </div>
+  
+      <button mat-fab color="primary" class="scroll-to-top" (click)="scrollToHeader()">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>

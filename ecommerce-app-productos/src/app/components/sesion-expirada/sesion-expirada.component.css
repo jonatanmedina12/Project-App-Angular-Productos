@@ -1,0 +1,105 @@
+.dialog-container {
+    padding: 24px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease-out;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  
+  h2 mat-icon {
+    margin-right: 10px;
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    color: #3f51b5;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .mat-dialog-actions {
+    justify-content: center;
+  }
+  
+  .mat-stroked-button,
+  .mat-raised-button {
+    margin: 0 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mat-stroked-button {
+    color: #3f51b5;
+    border-color: #3f51b5;
+    background-color: transparent;
+  }
+  
+  .mat-stroked-button mat-icon,
+  .mat-raised-button mat-icon {
+    margin-right: 8px;
+  }
+  
+  .mat-stroked-button:not(:disabled):hover {
+    color: #303f9f;
+    border-color: #303f9f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mat-raised-button {
+    background-color: #3f51b5;
+    color: #fff;
+    animation: pulse 2s infinite;
+  }
+  
+  .mat-raised-button:not(:disabled):hover {
+    background-color: #303f9f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animaciones */
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(63, 81, 181, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(63, 81, 181, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(63, 81, 181, 0);
+    }
+  }

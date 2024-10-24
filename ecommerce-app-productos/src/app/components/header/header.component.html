@@ -1,0 +1,18 @@
+<header class="modern-header" [@fadeInOut] [class.scrolled]="isScrolled">
+    <mat-toolbar>
+ 
+      <span class="app-name">Ecommerce</span>
+      <span class="spacer"></span>
+      <nav [@slideInOut]="menuState">
+        <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </a>
+        
+      </nav>
+      <button mat-flat-button color="accent" routerLink="/login" class="login-button">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+    </mat-toolbar>
+  </header>

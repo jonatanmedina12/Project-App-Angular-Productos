@@ -1,0 +1,77 @@
+<div class="inventario-container" [@fadeInAnimation]>
+    <mat-card class="main-card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image">
+          <mat-icon>inventory</mat-icon>
+        </div>
+        <mat-card-title>Gestión de Inventario</mat-card-title>
+        <mat-card-subtitle>Administra el stock de tus productos</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="inventarioForm" (ngSubmit)="onSubmit()" class="inventario-form" [@formAnimation]>
+          <mat-form-field appearance="outline">
+            <mat-label>Producto</mat-label>
+            <mat-select formControlName="productId">
+              <mat-option *ngFor="let producto of productos" [value]="producto.id">
+                {{producto.name}}
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>category</mat-icon>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" formControlName="quantity">
+            <mat-icon matSuffix>inventory_2</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>reason</mat-label>
+            <input matInput formControlName="reason">
+            <mat-icon matSuffix>place</mat-icon>
+          </mat-form-field>
+
+  
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="inventarioForm.invalid">
+              <mat-icon>{{editando ? 'update' : 'add'}}</mat-icon>
+              {{editando ? 'Actualizar' : 'Crear'}} Inventario
+            </button>
+            <button mat-stroked-button type="button" (click)="resetForm()">
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </form>
+  
+        <div class="inventario-list">
+          <h3 class="list-title">Registros de Inventario</h3>
+          <mat-card *ngFor="let inventario of inventarios" class="inventario-item" [@itemAnimation]>
+            <mat-card-header>
+              <div mat-card-avatar class="item-icon">
+                <mat-icon>shopping_cart</mat-icon>
+              </div>
+              <mat-card-title>Producto ID: {{inventario.productId}}</mat-card-title>
+              <mat-card-subtitle>Cantidad: {{inventario.previousStock}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p><mat-icon>place</mat-icon> Nombre: {{inventario.productName}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-icon-button color="primary" (click)="editarInventario(inventario)" matTooltip="Editar">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="eliminarInventario(inventario.id)" matTooltip="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="actualizarStock(inventario.id, inventario.newStock)" matTooltip="Actualizar Stock">
+                <mat-icon>update</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" (click)="verificarDisponibilidad(inventario.id, inventario.previousStock)" matTooltip="Verificar Disponibilidad">
+                <mat-icon>check_circle</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

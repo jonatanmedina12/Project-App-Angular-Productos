@@ -1,0 +1,121 @@
+<div class="orden-container">
+  <mat-card class="main-card">
+    <mat-card-header>
+      <mat-card-title>Gestión de Órdenes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <button mat-raised-button color="primary" (click)="mostrarFormularioCreacion()">
+        <mat-icon>add</mat-icon> Nueva Orden
+      </button>
+
+      <div class="ordenes-list">
+        <mat-card *ngFor="let orden of ordenes" class="orden-item">
+          <mat-card-header>
+            <mat-card-title>Orden #{{ orden.id }}</mat-card-title>
+            <mat-card-subtitle>Usuario: {{ orden.usuarioId }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p><strong>Fecha:</strong> {{ orden.fecha | date:'short' }}</p>
+            <p><strong>Total:</strong> {{ orden.total }}</p>
+            <p><strong>Estado:</strong> {{ orden.estado }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [matMenuTriggerFor]="menu">Acciones</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="actualizarEstadoOrden(orden.id, 'PROCESANDO')">Procesar</button>
+              <button mat-menu-item (click)="actualizarEstadoOrden(orden.id, 'ENVIADA')">Enviar</button>
+              <button mat-menu-item (click)="actualizarEstadoOrden(orden.id, 'ENTREGADA')">Entregar</button>
+              <button mat-menu-item (click)="cancelarOrden(orden.id)">Cancelar</button>
+            </mat-menu>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <mat-paginator [length]="totalElements"
+                     [pageSize]="size"
+                     [pageSizeOptions]="[5, 10, 25, 100]"
+                     (page)="cambiarPagina($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="overlay" *ngIf="mostrarFormulario">
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title>Crear Nueva Orden</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="ordenForm" (ngSubmit)="crearOrden()">
+          <mat-form-field appearance="fill">
+            <mat-label>Usuario</mat-label>
+            <mat-select formControlName="usuarioId">
+              <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                {{usuario.username}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <h3>Detalles de la Orden</h3>
+          <div formArrayName="detalles">
+            <div *ngFor="let detalle of detalles.controls; let i = index" [formGroupName]="i" class="detalle-item">
+           
+              <mat-form-field appearance="outline">
+                <mat-label>Producto</mat-label>
+                <mat-select formControlName="productoId">
+                  <mat-option *ngFor="let producto of inventarios" [value]="producto.id">
+                    {{producto.productName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Cantidad</mat-label>
+                <input matInput formControlName="cantidad" type="number" (input)="calcularTotal()">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Precio Unitario</mat-label>
+                <input matInput formControlName="precioUnitario" type="number" (input)="calcularTotal()">
+              </mat-form-field>
+              <button mat-icon-button color="warn" (click)="eliminarDetalle(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <button mat-raised-button type="button" (click)="agregarDetalle()">Agregar Detalle</button>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Total</mat-label>
+            <input matInput formControlName="total" type="number" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descuento</mat-label>
+            <input matInput formControlName="descuento" type="number" (input)="calcularTotal()">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado">
+              <mat-option value="PENDIENTE">Pendiente</mat-option>
+              <mat-option value="PROCESANDO">Procesando</mat-option>
+              <mat-option value="ENVIADA">Enviada</mat-option>
+              <mat-option value="ENTREGADA">Entregada</mat-option>
+              <mat-option value="CANCELADA">Cancelada</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="ordenForm.invalid">Crear Orden</button>
+            <button mat-button type="button" (click)="ocultarFormularioCreacion()">Cancelar</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

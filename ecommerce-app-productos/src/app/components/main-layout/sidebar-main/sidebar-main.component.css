@@ -1,0 +1,132 @@
+.sidenav-container {
+    height: 100%;
+    background: linear-gradient(to bottom, #f3f3f3, #e1e1e1);
+  }
+  
+  .sidenav {
+    width: 250px;
+    background: #ffffff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden; /* Previene el desbordamiento */
+  }
+  
+  .sidenav-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 16px 0;
+    box-sizing: border-box; /* Incluye padding en el cálculo del tamaño */
+  }
+  
+  mat-nav-list {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite scroll solo si es necesario */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en IE/Edge */
+  }
+  
+  mat-nav-list::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en Chrome/Safari/Opera */
+  }
+  
+  .nav-item {
+    margin: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap; /* Previene el wrap del texto */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
+  }
+  
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  .nav-item:hover::after {
+    animation: ripple 1s ease-out;
+  }
+  
+  .nav-item:hover {
+    background-color: rgba(0,0,0,0.05);
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .nav-item.active-link {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+  
+  .nav-item mat-icon {
+    margin-right: 16px;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Previene que el icono se encoja */
+  }
+  
+  .nav-item:hover mat-icon {
+    transform: scale(1.2);
+    animation: spin 0.5s ease-in-out;
+  }
+  
+  .logout-button-container {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .logout-button {
+    width: calc(100% - 32px); /* Ajusta el ancho para evitar desbordamiento horizontal */
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .logout-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(0,0,0,0.18), 0 5px 5px rgba(0,0,0,0.12);
+  }
+  
+  .logout-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 1;
+    }
+    20% {
+      transform: scale(25, 25);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(40, 40);
+    }
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

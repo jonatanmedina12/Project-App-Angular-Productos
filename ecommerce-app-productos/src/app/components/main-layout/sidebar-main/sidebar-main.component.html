@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer [@sidenavAnimation]="isOpen ? 'open' : 'closed'" class="sidenav" mode="side" [opened]="isOpen">
+      <div class="sidenav-content">
+        <mat-nav-list>
+          <a mat-list-item routerLinkActive="active-link" [routerLink]="['/main']" class="nav-item">
+            <mat-icon>dashboard</mat-icon>
+            <span>Inicio</span>
+          </a>
+          <a mat-list-item  routerLinkActive="active-link" [routerLink]="['/main/productos']" class="nav-item">
+            <mat-icon>bar_chart</mat-icon>
+            <span>Productos</span>
+          </a>
+          <a mat-list-item  routerLinkActive="active-link" [routerLink]="['/main/inventarios']" class="nav-item">
+            <mat-icon>settings</mat-icon>
+            <span>Inventario</span>
+          </a>
+          <a mat-list-item routerLinkActive="active-link" [routerLink]="['/main/ordenes']" class="nav-item">
+            <mat-icon>add_box</mat-icon>
+            <span>Ordenes</span>
+          </a>
+          <a mat-list-item routerLinkActive="active-link" [routerLink]="['/main/perfil']" class="nav-item">
+            <mat-icon>person</mat-icon>
+            <span>Perfil</span>
+          </a>
+       
+        
+        </mat-nav-list>
+        
+        <div class="logout-button-container">
+          <button mat-raised-button color="warn" class="logout-button nav-item" (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="loginError" class="login-error">
+        {{ loginError }}
+      </div>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

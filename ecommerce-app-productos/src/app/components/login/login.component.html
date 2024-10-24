@@ -1,0 +1,51 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-card class="modern-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>login</mat-icon>
+            Iniciar sesión
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="modern-input">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput formControlName="email" type="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">El correo es obligatorio</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Ingrese un correo válido</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="modern-input">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" required>
+            <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+              {{hidePassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
+          </mat-form-field>
+          <div *ngIf="loginError" class="login-error">
+            {{ loginError }}
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="modern-button">
+            <mat-icon>login</mat-icon>
+            Iniciar sesión
+          </button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <div class="login-footer">
+            <a routerLink="/register" class="modern-link">
+              <mat-icon>person_add</mat-icon>
+              ¿No estás registrado? Crea una cuenta
+            </a>
+            <a routerLink="/forgot-password" class="modern-link">
+              <mat-icon>lock_open</mat-icon>
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+        </mat-card-footer>
+      </mat-card>
+    </form>
+  </div>

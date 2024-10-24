@@ -1,0 +1,105 @@
+<div class="product-management-container">
+  <!-- Tarjeta de formulario flotante -->
+  <div *ngIf="mostrarCreacion" class="overlay">
+    <mat-card [@fadeInOut] class="form-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>{{ productoEnEdicion ? 'edit' : 'add' }}</mat-icon>
+        <mat-card-title>{{ productoEnEdicion ? 'Editar Producto' : 'Crear Nuevo Producto' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="productoForm" (ngSubmit)="productoEnEdicion ? guardarEdicion() : crearProducto()">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-icon matSuffix>label</mat-icon>
+            <mat-error *ngIf="productoForm.get('name')?.hasError('required')">El nombre es requerido</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+            <mat-icon matSuffix>description</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Precio</mat-label>
+            <input matInput formControlName="price" type="number" required>
+            <mat-icon matSuffix>attach_money</mat-icon>
+            <mat-error *ngIf="productoForm.get('price')?.hasError('required')">El precio es requerido</mat-error>
+            <mat-error *ngIf="productoForm.get('price')?.hasError('min')">El precio debe ser mayor o igual a 0</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" formControlName="stock">
+            <mat-icon matSuffix>inventory_2</mat-icon>
+            <mat-error *ngIf="productoForm.get('stock')?.hasError('required')">El precio es requerido</mat-error>
+            <mat-error *ngIf="productoForm.get('price')?.hasError('min')">El precio debe ser mayor o igual a 0</mat-error>
+          </mat-form-field>
+  
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="productoForm.invalid">
+              <mat-icon>{{ productoEnEdicion ? 'save' : 'add' }}</mat-icon>
+              {{ productoEnEdicion ? 'Actualizar' : 'Crear' }}
+            </button>
+            <button mat-button type="button" (click)="cerrarFormulario()">
+              <mat-icon>close</mat-icon> Cancelar
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Contenido principal -->
+  <mat-card class="main-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>inventory_2</mat-icon>
+      <mat-card-title>Gestión de Productos</mat-card-title>
+      <mat-card-subtitle>Administra tu inventario fácilmente</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="search-and-add">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Buscar productos</mat-label>
+          <input matInput [(ngModel)]="criterioBusqueda" (keyup.enter)="buscarProductos()">
+          <button mat-icon-button matSuffix (click)="buscarProductos()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="mostrarFormularioCreacion()" class="add-button">
+          <mat-icon>add</mat-icon> Nuevo Producto
+        </button>
+      </div>
+
+      <div class="product-list">
+        <mat-card *ngFor="let producto of productos" [@fadeInOut] class="product-item">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>shopping_basket</mat-icon>
+            <mat-card-title>{{ producto.name }}</mat-card-title>
+            <mat-card-subtitle>{{ producto.description }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="price">Precio: {{ producto.price }}</p>
+            <mat-card-subtitle>Descripción {{ producto.description }}</mat-card-subtitle>
+            <mat-card-subtitle>Stock {{ producto.stock }}</mat-card-subtitle>
+
+            <mat-chip-list>
+              <mat-chip [color]="producto.isDeleted ? 'primary' : 'warn'" selected>
+                {{ producto.isDeleted ? 'Inactivo' : 'Activo' }}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="editarProducto(producto)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarProducto(producto.id)" matTooltip="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

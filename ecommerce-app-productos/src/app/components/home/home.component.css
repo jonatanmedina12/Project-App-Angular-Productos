@@ -1,0 +1,24 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  app-header, app-footer {
+    flex-shrink: 0;
+  }
+  
+  /* Ajusta estos valores según las alturas reales de tu header y footer */
+  app-header {
+    height: 60px;
+  }
+  
+  app-footer {
+    height: 60px;
+  }

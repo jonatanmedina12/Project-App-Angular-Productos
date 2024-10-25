@@ -1,0 +1,156 @@
+.animated-toolbar {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #1976d2, #2196f3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .animated-toolbar:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+  
+  .menu-button, .notification-button, .profile-button {
+    transition: all 0.3s ease;
+  }
+  
+  .menu-button:hover, .notification-button:hover, .profile-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .menu-button:active, .notification-button:active, .profile-button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Animación del icono de hamburguesa */
+  .hamburger-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .hamburger-icon span {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-button:hover .hamburger-icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  
+  .menu-button:hover .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-button:hover .hamburger-icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  
+  /* Animación del botón de notificaciones */
+  .notification-button {
+    position: relative;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #ff4081;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .notification-button:hover .notification-badge {
+    transform: scale(1);
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 64, 129, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 64, 129, 0);
+    }
+  }
+  
+  /* Animación del botón de perfil */
+  .profile-icon {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .profile-button:hover .profile-icon {
+    transform: rotate(360deg);
+  }
+  
+  .profile-icon mat-icon {
+    transition: all 0.3s ease;
+  }
+  
+  .profile-button:hover .profile-icon mat-icon {
+    animation: bounce 0.5s ease infinite alternate;
+  }
+  
+  @keyframes bounce {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-4px);
+    }
+  }
+  
+  .title {
+    margin-left: 16px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .title:hover {
+    transform: translateX(5px);
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  /* Estilos para el menú desplegable */
+  ::ng-deep .mat-menu-panel {
+    border-radius: 8px !important;
+    overflow: hidden;
+  }
+  
+  ::ng-deep .mat-menu-item {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  ::ng-deep .mat-menu-item:hover {
+    background-color: rgba(0,0,0,0.05);
+  }
+  
+  ::ng-deep .mat-menu-item mat-icon {
+    margin-right: 8px;
+  }

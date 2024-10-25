@@ -1,0 +1,160 @@
+.orden-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.main-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  background-color: #3f51b5;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+mat-card-content {
+  padding: 1rem;
+}
+
+.ordenes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.orden-item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.orden-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.orden-item mat-card-header {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.orden-item mat-card-title {
+  font-size: 1.2rem;
+}
+
+.orden-item mat-card-content {
+  padding: 1rem;
+}
+
+.orden-item mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.form-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.form-card mat-card-header {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.form-card mat-card-content {
+  padding: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.detalle-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.detalle-item mat-form-field {
+  flex: 1;
+}
+
+button[type="submit"] {
+  align-self: flex-end;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .ordenes-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-card {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .detalle-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

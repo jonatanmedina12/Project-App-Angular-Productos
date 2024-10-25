@@ -1,0 +1,16 @@
+<div class="dialog-container" [@fadeIn]>
+    <h2 mat-dialog-title>
+      <mat-icon>access_time</mat-icon>
+      Sesión Expirada
+    </h2>
+    <mat-dialog-content>
+      <p>{{data.message}}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-stroked-button  (click)="onNoClick()" [@pulse]>
+        <mat-icon>exit_to_app</mat-icon>
+        Salir
+      </button>
+     
+    </mat-dialog-actions>
+  </div>
